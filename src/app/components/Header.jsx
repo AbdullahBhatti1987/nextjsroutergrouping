@@ -11,8 +11,8 @@ function Header({}) {
     router.push('./login');
   };
     return (
-    <header className="text-gray-600 body-font">
-  <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <header className="bg-gray-300 text-gray-600 body-font">
+  <div className="w-11/12 mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -30,8 +30,8 @@ function Header({}) {
     </a>
     <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
       <Link href={"/"} className="mr-5 hover:text-gray-900">Home</Link>
-      <Link href={"/portfolio"} className="mr-5 hover:text-gray-900">PortFolio</Link>
-      <Link href={"/blogs"} className="mr-5 hover:text-gray-900">Blogs</Link>
+      <Link href={"/products"} className="mr-5 hover:text-gray-900">Products</Link>
+      <Link href={"/bestseller"} className="mr-5 hover:text-gray-900">Best Seller</Link>
       <Link href={"/aboutus"} className="mr-5 hover:text-gray-900">About Us</Link>
       <Link href={"/contactus"} className="mr-5 hover:text-gray-900">Contact Us</Link>
     </nav>
