@@ -1,8 +1,8 @@
-import React from 'react'
+
 
 export default function page() {
   return (
-    <div>contacts
+    <div>Contact us
       
     </div>
   )
