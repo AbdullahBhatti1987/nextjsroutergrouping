@@ -1,35 +1,102 @@
-"use client";
-const { default: Link } = require("next/link");
-import { useEffect, useState } from "react";
+// "use client";
 
-export default  function  products({ }) {
-  const [products, setProducts] = useState([]);
+import Link from "next/link";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
-  useEffect(() => {
-    const fetchData = async () => {   
-        const response = await fetch("https://dummyjson.com/products");
-        const data = await response.json();
-        setProducts(data.products); 
-    };
+export default async function products({}) {
+  const category = await fetch("https://dummyjson.com/products/categories");
+  const categories = await category.json();
 
-    fetchData();
-  }, []);
+  const res = await fetch("https://dummyjson.com/products");
+  const data = await res.json();
+  const allProducts = data.products;
 
   return (
     <div className="">
       <h1>Product List</h1>
-      <div className="flex flex-wrap mx-auto w-[calc(100%-5%)] justify-center  gap-5">
-        {products.map((data) => (
-           <Link key={data.id} href={`/products/${data.id}`} className="w-1/5 flex flex-col justify-start items-center border-2 ">
-            <div>
-            <img src={data.thumbnail} className="obj" alt="" />
-            <div className=" bg-emerald-200 w-full px-2">
-              <h1 className="text-lg truncate text-left">{data.title}</h1>
-              <h3 className="text-2xl text-left">${data.price}</h3>
-            </div>
-          </div>
+      <div className={"w-10/12 mx-auto flex flex-wrap gap-4 my-6"}>
+        <Link
+          href={"/products"}
+          className={
+            "border bg-gray-200 hover:bg-gray-400 hover:shadow-lg shadow-sm p-2"
+          }
+        >
+          All
+        </Link>
+        {categories.map((data) => (
+          <Link
+            key={data.slug}
+            href={`/products/category/${data.slug}`}
+            className={
+              "border bg-gray-200  hover:bg-blue-400 hover:text-white hover:rounded-md hover:shadow-lg shadow-sm p-2 transition ease-in-out duration-1000"
+            }
+          >
+            {data.slug}
           </Link>
         ))}
+      </div>
+
+      <div className="flex flex-wrap mx-auto lg:w-10/12 gap-5">
+        {allProducts.map((data) => (
+          <Link
+            key={data.id}
+            href={`/products/${data.id}`}
+            className="lg:w-[calc(25%-1.5%)] bg-white flex flex-col justify-start items-center border-2 "
+          >
+            <div className={"w-full"}>
+              <img src={data.thumbnail} className={"object-fit"} alt="" />
+              <div className="w-full p-4">
+                <h1 className="text-lg truncate text-left">{data.title}</h1>
+                <h3 className="text-2xl text-left">${data.price}</h3>
+                <div className={" py-4 flex justify-between items-center"}>
+                  <button
+                    className={
+                      "border rounded-md shadow-md p-2 bg-gray-200 hover:gray-400"
+                    }
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    className={
+                      "border rounded-md shadow-md p-2 bg-gray-200 hover:gray-400"
+                    }
+                  >
+                    Buy Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      <div className={"py-4 flex justify-center items-center"}>
+        
+      <Pagination>
+  <PaginationContent>
+    <PaginationItem >
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+
       </div>
     </div>
   );

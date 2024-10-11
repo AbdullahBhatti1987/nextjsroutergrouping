@@ -1,23 +1,9 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from "next/link";
 
 export default function page() {
-
-
-
   return (
-    <>
-    <h1 >Home Page</h1>
-
-    <Link href={"/quotes"}>Qoute</Link>
-
-
-
-
-
-
-
-
-    </>
-  )
+    <div className={"xs:bg-pink-200 sm:bg-orange-200 md:bg-gray-200 lg:bg-yellow-200 xl:bg-green-200 w-full h-screen"}>
+        Home Page
+    </div>
+  );
 }
